@@ -1,0 +1,19 @@
+{
+  "name": "kraig-proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hrr43fec-luke/kraig-proxy",
+  "author": "Kraig Hanson <KraigGit@GMail.Com>",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "grunt": "^1.0.4",
+    "grunt-aws-s3": "^2.0.2",
+    "grunt-git": "^1.0.14",
+    "grunt-run": "^0.8.1",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}

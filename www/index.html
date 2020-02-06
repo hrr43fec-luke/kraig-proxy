@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html style="height:100%">
 
-<body>
+<body style="height:100%">
   <div style="display:flex; flex-direction:row">
     <div id="channel-service"></div>
-    <div id="app" style="flex:1;overflow:hidden"></div>
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction: column;">
+      <div id="player-service"></div>
+      <div id="app"></div>
+    </div>
     <div id="chat-service" style="height:100%; color:black"></div>
   </div>
 </body>
-<script src="https://kmh01.s3-us-west-2.amazonaws.com/ChatService.js"></script>
+<!-- <script src="https://kmh01.s3-us-west-2.amazonaws.com/ChatService.js"></script> -->
+<script src="PlayerService.js"></script>
+<script src="ChatService.js"></script>
 <script src="RecService.js"></script>
 <script src="CarouselService.js"></script>
 
