@@ -6,7 +6,6 @@
   "author": "Kraig Hanson <KraigGit@GMail.Com>",
   "license": "MIT",
   "devDependencies": {
-    "express": "^4.17.1",
     "grunt": "^1.0.4",
     "grunt-aws-s3": "^2.0.2",
     "grunt-git": "^1.0.14",
@@ -14,6 +13,8 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "node-fetch": "^2.6.0"
   }
 }

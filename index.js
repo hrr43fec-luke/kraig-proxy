@@ -1,3 +1,4 @@
+require('dotenv').config({ debug: process.env.DEBUG });
 const express = require('express');
 const fetch = require('node-fetch');
 
@@ -5,18 +6,18 @@ const server = express();
 
 const router = express.Router();
 
-const apis = {
-  player: 3001,
-  chats: 3002,
-  carousel: 3003,
-  channels: 3004,
+const hosts = {
+  player: process.env.PLAYER_HOST,
+  chats: process.env.CHATS_HOST,
+  carousel: process.env.CAROUSEL_HOST,
+  channels: process.env.CHANNELS_HOST,
 };
 
 router.use(express.static('www'));
 
 function handleAPI(type, req, res) {
-  if (type in apis) {
-    return fetch(`http://${req.hostname}:${apis[type]}${req.url}`)
+  if (type in hosts) {
+    return fetch(`${hosts[type]}${req.url}`)
       .then((results) => results.json())
       .then((results) => res.send(results));
   };
@@ -38,6 +39,12 @@ router.get('/videos/:userId', (req, res) => {
   return handleAPI('carousel', req, res);
 });
 
+router.get('/filter/:videoId/:categoryId', (req, res) => {
+  return handleAPI('carousel', req, res);
+});
+
 server.use(router);
 
-server.listen(3000);
+server.listen(process.env.PROXY_PORT, () => {
+  console.log(`Proxying on ${process.env.PROXY_PORT}.`)
+});
