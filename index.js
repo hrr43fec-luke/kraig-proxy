@@ -1,5 +1,5 @@
 require('dotenv').config({ debug: process.env.DEBUG });
-var proxy = require('express-http-proxy');
+const proxy = require('express-http-proxy');
 const express = require('express');
 
 const server = express();
@@ -13,29 +13,29 @@ const hosts = {
   channels: process.env.CHANNELS_HOST,
 };
 
-router.use(express.static('www'));
-
 const fixUrl = {proxyReqPathResolver: (req) => req.originalUrl};
 
 router.use('/api/channels/:videoId', proxy(process.env.CHANNELS_HOST, fixUrl));
 router.use('/ChannelService.js', proxy(process.env.CHANNELS_HOST, {
-  proxyReqPathResolver: (req) => 'main_bundle.js',
+    proxyReqPathResolver: (req) => '/main_bundle.js',
 }));
 
 router.use('/api/chats', proxy(process.env.CHATS_HOST, fixUrl));
 router.use('/ChatService.js', proxy(process.env.CHATS_HOST, fixUrl));
 
 router.use('/api/livestream/:videoId', proxy(process.env.PLAYER_HOST, fixUrl));
-router.use('/PlayerService.js', proxy(process.env.CHANNELS_HOST, {
-  proxyReqPathResolver: (req) => 'main_bundle.js',
+router.use('/PlayerService.js', proxy(process.env.PLAYER_HOST, {
+  proxyReqPathResolver: (req) => '/main_bundle.js',
 }));
 
 router.use('/videos/:videoId', proxy(process.env.CAROUSEL_HOST, fixUrl));
 router.use('/CarouselService.js', proxy(process.env.CAROUSEL_HOST, {
-  proxyReqPathResolver: (req) => 'bundle.js',
+  proxyReqPathResolver: (req) => '/bundle.js',
 }));
 
 router.use('/filter/:videoId/:categoryId', proxy(process.env.CAROUSEL_HOST, fixUrl));
+
+router.use(express.static('www'));
 
 server.use(router);
 
