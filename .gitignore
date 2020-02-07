@@ -1,0 +1,7 @@
+node_modules
+.env
+.awskeys
+www/CarouselService.js
+www/ChatService.js
+www/RecService.js
+www/PlayerService.js
