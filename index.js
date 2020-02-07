@@ -1,6 +1,6 @@
 require('dotenv').config({ debug: process.env.DEBUG });
+var proxy = require('express-http-proxy');
 const express = require('express');
-const fetch = require('node-fetch');
 
 const server = express();
 
@@ -15,33 +15,27 @@ const hosts = {
 
 router.use(express.static('www'));
 
-function handleAPI(type, req, res) {
-  if (type in hosts) {
-    return fetch(`${hosts[type]}${req.url}`)
-      .then((results) => results.json())
-      .then((results) => res.send(results));
-  };
-}
+const fixUrl = {proxyReqPathResolver: (req) => req.originalUrl};
 
-router.get('/api/livestream/:videoId', (req, res) => {
-  return handleAPI('player', req, res);
-});
+router.use('/api/channels/:videoId', proxy(process.env.CHANNELS_HOST, fixUrl));
+router.use('/ChannelService.js', proxy(process.env.CHANNELS_HOST, {
+  proxyReqPathResolver: (req) => 'main_bundle.js',
+}));
 
-router.get('/api/chats/:videoId', (req, res) => {
-  return handleAPI('chats', req, res);
-});
+router.use('/api/chats', proxy(process.env.CHATS_HOST, fixUrl));
+router.use('/ChatService.js', proxy(process.env.CHATS_HOST, fixUrl));
 
-router.get('/api/channels/:videoId', (req, res) => {
-  return handleAPI('channels', req, res);
-});
+router.use('/api/livestream/:videoId', proxy(process.env.PLAYER_HOST, fixUrl));
+router.use('/PlayerService.js', proxy(process.env.CHANNELS_HOST, {
+  proxyReqPathResolver: (req) => 'main_bundle.js',
+}));
 
-router.get('/videos/:userId', (req, res) => {
-  return handleAPI('carousel', req, res);
-});
+router.use('/videos/:videoId', proxy(process.env.CAROUSEL_HOST, fixUrl));
+router.use('/CarouselService.js', proxy(process.env.CAROUSEL_HOST, {
+  proxyReqPathResolver: (req) => 'bundle.js',
+}));
 
-router.get('/filter/:videoId/:categoryId', (req, res) => {
-  return handleAPI('carousel', req, res);
-});
+router.use('/filter/:videoId/:categoryId', proxy(process.env.CAROUSEL_HOST, fixUrl));
 
 server.use(router);
 
