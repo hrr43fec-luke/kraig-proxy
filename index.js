@@ -39,6 +39,8 @@ router.use(express.static('www'));
 
 server.use(router);
 
-server.listen(process.env.PROXY_PORT, () => {
-  console.log(`Proxying on ${process.env.PROXY_PORT}.`)
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+  console.log(`Proxying on ${port}.`)
 });
