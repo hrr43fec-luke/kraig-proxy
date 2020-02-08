@@ -5,8 +5,11 @@
   "repository": "https://github.com/hrr43fec-luke/kraig-proxy",
   "author": "Kraig Hanson <KraigGit@GMail.Com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "zip": "git archive -v -o kraig-proxy.zip --format=zip HEAD"
+  },
   "devDependencies": {
-    "express": "^4.17.1",
     "grunt": "^1.0.4",
     "grunt-aws-s3": "^2.0.2",
     "grunt-git": "^1.0.14",
@@ -14,6 +17,8 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.0"
   }
 }
