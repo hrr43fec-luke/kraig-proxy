@@ -17,7 +17,7 @@ const fixUrl = {proxyReqPathResolver: (req) => req.originalUrl};
 
 router.use('/api/channels/:videoId', proxy(process.env.CHANNELS_HOST, fixUrl));
 router.use('/ChannelService.js', proxy(process.env.CHANNELS_HOST, {
-    proxyReqPathResolver: (req) => '/main_bundle.js',
+    proxyReqPathResolver: (req) => '/ChannelService.js',
 }));
 
 router.use('/api/chats', proxy(process.env.CHATS_HOST, fixUrl));
