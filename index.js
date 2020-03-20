@@ -17,7 +17,7 @@ const fixUrl = {proxyReqPathResolver: (req) => req.originalUrl};
 
 router.use('/api/channels/:videoId', proxy(process.env.CHANNELS_HOST, fixUrl));
 router.use('/ChannelService.js', proxy(process.env.CHANNELS_HOST, {
-    proxyReqPathResolver: (req) => '/ChannelService.js',
+    proxyReqPathResolver: (req) => '/channel_bundle.js',
 }));
 
 router.use('/api/chats', proxy(process.env.CHATS_HOST, fixUrl));
@@ -30,7 +30,7 @@ router.use('/PlayerService.js', proxy(process.env.PLAYER_HOST, {
 
 router.use('/videos/:videoId', proxy(process.env.CAROUSEL_HOST, fixUrl));
 router.use('/CarouselService.js', proxy(process.env.CAROUSEL_HOST, {
-  proxyReqPathResolver: (req) => '/bundle.js',
+  proxyReqPathResolver: (req) => '/carousel.js',
 }));
 
 router.use('/filter/:videoId/:categoryId', proxy(process.env.CAROUSEL_HOST, fixUrl));
