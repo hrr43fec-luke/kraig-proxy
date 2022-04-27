@@ -10,7 +10,7 @@
     "zip": "git archive -v -o kraig-proxy.zip --format=zip HEAD"
   },
   "devDependencies": {
-    "grunt": "^1.0.4",
+    "grunt": "^1.5.2",
     "grunt-aws-s3": "^2.0.2",
     "grunt-git": "^1.0.14",
     "grunt-run": "^0.8.1",
